@@ -3,8 +3,7 @@ const { MongoClient } = require('mongodb');
 
 const { DB_USER, DB_PW, DB_NAME, DB_HOST } = process.env;
 
-const url = `mongodb+srv://${DB_USER}:${DB_PW}@${DB_NAME}.${DB_HOST}/`;
-
+const url = `mongodb://${DB_USER}:${DB_PW}@${DB_HOST}:27017/${DB_NAME}`;
 const client = new MongoClient(url);
 
 let _db;
@@ -17,11 +16,9 @@ const connectDb = async (callback) => {
     callback(err);
     throw err;
   }
-}
+};
 
 const getDb = () => _db;
 const closeDb = () => client.close();
 
-
-
-module.exports = { closeDb, connectDb, getDb }
+module.exports = { closeDb, connectDb, getDb };
